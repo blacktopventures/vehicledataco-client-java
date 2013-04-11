@@ -41,7 +41,7 @@ import java.io.UnsupportedEncodingException;
 public class VehicleDataCo {
 	
 	private final String VEHICLEDATACO_CLIENT_VERSION = "0.1";
-	private String mVersion = "0.1";
+	private String mVersion = "0.2";
     private String mHost = "api.vehicledata.co";
     private String mAppkey = null;
     private String mSecret = null;
@@ -124,6 +124,13 @@ public class VehicleDataCo {
     	args.put("style", style);
     	args.put("trim", trim);
     	return doCall("vehicles.getTransmissions", args);
+    }
+
+    public JSONObject vin_decode(String vin) {
+        if (!mInitialized) return null;
+        HashMap<String, String> args = new HashMap<String, String>();
+        args.put("vin", vin);
+        return doCall("vin.decode", args);
     }
 
     private JSONObject doCall (String function) {
